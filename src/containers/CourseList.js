@@ -36,7 +36,7 @@ class CourseList extends React.Component {
                 <h2>Course List</h2>
                 <table className="table">
                     <thead><tr><th>Title</th></tr></thead>
-                    <tbody>
+                    <tbody id="tbody">
                     {this.courseRows()}
                     </tbody>
                 </table>

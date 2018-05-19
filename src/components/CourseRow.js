@@ -7,8 +7,7 @@ class CourseRow extends React.Component {
     render() {
         return (
             <div>
-            <tr><td>Course Row</td></tr>
-            <tr><td>{this.props.course.title}</td></tr>
+            <tr><td id={this.props.course.id}>{this.props.course.title}</td></tr>
             </div>
     )}}
 

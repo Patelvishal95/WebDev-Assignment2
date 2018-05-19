@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 const COURSE_API_URL =
-    'localhost:8080/api/course';//later change this to heroku url
+    'http://localhost:8080/api/course';//later change this to heroku url
 class CourseService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
@@ -12,11 +12,25 @@ class CourseService {
         return this[_singleton]
     }
     findAllCourses() {
+        console.log("in find all courses");
         return fetch(COURSE_API_URL)
             .then(function(response){
+                console.log(response);
                 return response.json();
             });
     }
+    createCourse(course){
+        return fetch(COURSE_API_URL, {
+            body: JSON.stringify(course),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
 
 }
 export default CourseService;
