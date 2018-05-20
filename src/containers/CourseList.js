@@ -2,6 +2,7 @@ import React from 'react';
 import CourseRow from '../components/CourseRow';
 import CourseService from '../services/CourseService';
 import TableHead from '../components/TableHead';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
 class CourseList extends React.Component {
 
@@ -34,11 +35,13 @@ class CourseList extends React.Component {
 
     }
 
-
+    courseClicked(id){
+        console.log(id)
+    }
     courseRows() {
 
         var rows = this.state.courses.map(function(course) {
-            return <CourseRow key={course.id} course={course} deletefunction={this.onClick} />
+            return <CourseRow key={course.id} course={course} courseclicked={this.courseClicked} deletefunction={this.onClick} />
         },this);
         return (
             rows
@@ -75,7 +78,9 @@ class CourseList extends React.Component {
                 <table className="table table-hover" id='table'>
                     <TableHead/>
                     <tbody id="tbody">
+
                     {this.courseRows()}
+
                     </tbody>
                 </table>
             </div>
