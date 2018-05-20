@@ -1,15 +1,15 @@
 import React from 'react';
-import CourseList from './CourseList';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import Header from '../components/Header'
+import CourseList from '../containers/CourseList';
+
 class CourseManager extends React.Component {
+    constructor(){
+        super();
+    }
+
     render() {
         return (
-            <div>
-                <Header/>
-                    <h1>Course Manager</h1>
-                    <CourseList/>
-            </div>
+            <CourseList />
         )
     }
 }

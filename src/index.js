@@ -4,6 +4,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import CourseManager from "./containers/CourseManager";
 
 ReactDOM.render(
-    <CourseManager/>,
+
+    <CourseManager/>
+    ,
     document.getElementById('root')
 );
