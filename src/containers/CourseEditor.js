@@ -22,7 +22,7 @@ class CourseEditor extends React.Component {
         <div>
             <h2>Editing course: {this.state.courseId}</h2>
             <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                     <ModuleList courseId={this.state.courseId}/>
                 </div>
                 <div className="col-8">

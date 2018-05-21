@@ -57,9 +57,8 @@ export default class ModuleList extends Component {
     renderListOfModules() {
         let modules = this.state.modules.map(function(module){
             return <ModuleListItem module={module}
-                                   key={module.id}/>
+                                   id={module.id}/>
         });
-        console.log(modules);
         return modules;
     }
     render() {
