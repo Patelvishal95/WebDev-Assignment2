@@ -11,15 +11,18 @@ class CourseManager extends React.Component {
 
     render() {
         return (
+
             <Router>
-            <Route path="/course"
+                <div>
+                <Route path="/courses"
                    component={CourseList}>
-            </Route>
+                </Route>
                 <Route path="/course/:courseId/edit"
                        component={CourseEditor}>
                 </Route>
-
+                </div>
             </Router>
+
         )
     }
 }

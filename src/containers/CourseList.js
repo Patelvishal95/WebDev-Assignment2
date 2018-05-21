@@ -80,7 +80,6 @@ class CourseList extends React.Component {
                     <tbody id="tbody">
 
                     {this.courseRows()}
-
                     </tbody>
                 </table>
             </div>
