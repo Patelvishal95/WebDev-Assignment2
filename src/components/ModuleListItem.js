@@ -6,6 +6,7 @@ export default class ModuleListItem
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
+        this.onModuleSelected = this.onModuleSelected.bind(this);
         this.moduleService = ModuleService.instance;
     }
     delete (event){
@@ -14,11 +15,14 @@ export default class ModuleListItem
             .deleteModule(event.target.parentNode.getAttribute('id'));
 
     }
+    onModuleSelected(event){
+        this.props.moduleclicked(event.target.getAttribute('id'));
+    }
     render() {
         return (
-            <li className="list-group-item">
+            <li onMouseDown={this.onModuleSelected} id={this.props.id} className="list-group-item">
                 {this.props.module.title}
-                <span className="float-right" id={this.props.id}>
+                <span className="float-right" >
                     <i className="fa fa-trash" onClick={this.delete}></i>
                 </span>
             </li>

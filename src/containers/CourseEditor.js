@@ -6,8 +6,14 @@ import LessonTabs from './LessonsTab';
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {courseId: ''};
+        this.state = {courseId: '',
+            lessons:[
+                {title: 'Lesson 1',id: 1},
+                {title: 'Lesson 2',id: 2},
+                {title:'Lesson 3', id: 3}
+            ]};
         this.selectCourse = this.selectCourse.bind(this);
+
     }
 
     componentDidMount() {
@@ -26,7 +32,7 @@ class CourseEditor extends React.Component {
                     <ModuleList courseId={this.state.courseId}/>
                 </div>
                 <div className="col-8">
-                    <LessonTabs/>
+                    <LessonTabs />
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ export default class ModuleList extends Component {
         super(props);
         this.state = {
             courseId: '',
+            moduleSelected:'',
             module: { title: '' },
             modules: [
                 {title: 'Module 1', id: 123},
@@ -19,7 +20,7 @@ export default class ModuleList extends Component {
         };
         this.createModule = this.createModule.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
-
+        this.moduleSelector = this.moduleSelector.bind(this);
         this.setCourseId =
             this.setCourseId.bind(this);
 
@@ -54,13 +55,20 @@ export default class ModuleList extends Component {
         console.log(event.target.value);
         this.setState({module: {title: event.target.value}});
     }
+    moduleSelector(id){
+        console.log("module selected");
+        console.log(id);
+        this.setState({moduleSelected:id});
+    }
     renderListOfModules() {
         let modules = this.state.modules.map(function(module){
-            return <ModuleListItem module={module}
+            return <ModuleListItem moduleclicked={this.moduleSelector} module={module}
                                    id={module.id}/>
-        });
+        },this);
         return modules;
     }
+
+
     render() {
         return (
             <div>
