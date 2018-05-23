@@ -94,7 +94,7 @@ export default class LessonTabs
             {this.renderListofLessons()}
             <li className="nav-item pt-2 pl-1" >
                 <input placeholder="Lesson Name" className="nav-item" id="moduleid"/>
-                <i className="pb-1 fa fa-plus btn bg-white" on onClick={this.addLesson}/>
+                <i className=" ml-2 pb-2 fa fa-plus btn bg-white" on onClick={this.addLesson}/>
             </li>
         </ul>
     );}}

@@ -35,10 +35,10 @@ class CourseEditor extends React.Component {
     }
     render() { return(
         <Router>
-            <div>
-                <div className="row bg-dark">
-                    <div className="col-3">
-            <h2 className="navbar navbar-light  text-light">Course: {this.state.courseName}</h2>
+            <div className="fill">
+                <div className="row bg-dark fill">
+                    <div className="col-3 fill">
+                        <h2 className="navbar navbar-light  text-light">Course: {this.state.courseName}</h2>
                     </div>
                     <div className="col-7 float-right pt-2 pb-2">
                         <Route path="/course/:courseId/edit/:moduleId"
@@ -46,9 +46,12 @@ class CourseEditor extends React.Component {
                         </Route>
                     </div>
                 </div>
-            <div className="row ">
-                <div className="col-3">
+            <div className="row flex-fill mh-100">
+                <div className="col-3 mt-2 h-100 flex-fill">
                     <ModuleList selectedmodule = {this.selectedModule} courseId={this.state.courseId}/>
+                </div>
+                <div className="col-9 mt-2 bg-light mh-100">
+                        <h3>Topics here</h3>
                 </div>
 
             </div>

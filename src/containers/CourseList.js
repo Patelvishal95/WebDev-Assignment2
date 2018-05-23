@@ -68,34 +68,26 @@ class CourseList extends React.Component {
 
             rows = this.state.courses.map(function (course) {
                 if(new Date(course.created).getTime()>yesterday){
-                    yesterdaycount++;
-                    console.log("yesterdaycount")
-                    console.log(yesterdaycount)
-                   return (<CourseRow key={course.id} date='yesterday' datecount={yesterdaycount}course={course} courseclicked={this.courseClicked}
+                    // yesterdaycount++;
+                   return (<CourseRow key={course.id} date='Yesterday' datecount={yesterdaycount++}course={course} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>lastweek){
-                    lastweekcount++;
-                    console.log("lastweekcount")
-                    console.log(lastweekcount)
-                    return (<CourseRow key={course.id} date='lastweek' course={course} datecount={lastweekcount} courseclicked={this.courseClicked}
+                    // lastweekcount++;
+                    return (<CourseRow key={course.id} date='Last Week - Six Months' course={course} datecount={lastweekcount++} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>sixmonthsago){
-                    sixmonthsagocount++;
-                    console.log("sixmonthsagocount")
-                    console.log(sixmonthsagocount)
-                    return (<CourseRow key={course.id} date='sixmonthsago' course={course}  datecount={sixmonthsagocount}courseclicked={this.courseClicked}
+                    // sixmonthsagocount++;
+                    return (<CourseRow key={course.id} date='Six Months - Year' course={course}  datecount={sixmonthsagocount++}courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>yearago){
-                    yearagocount++;
-                    console.log("yearagocount")
-                    console.log(yearagocount)
-                    return (<CourseRow key={course.id} date='yearago' course={course} datecount={yearagocount} courseclicked={this.courseClicked}
+                    // yearagocount++;
+                    return (<CourseRow key={course.id} date='One Year Ago' course={course} datecount={yearagocount++} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
@@ -170,8 +162,8 @@ sortbydatemodified(){
     render() {
 
         return (
-            <div className="flex-fill">
-                <nav className="navbar navbar-default navbar-fixed-top bg-primary text-white">
+            <div className="flex-fill ">
+                <nav className="navbar navbar-fixed-top flex-column flex-md-row  bg-primary text-white">
 
                     <div className="navbar-header">
                         <label className="navbar-brand text-white" >Course Manager</label>
@@ -181,7 +173,7 @@ sortbydatemodified(){
                         <button className="btn btn-danger px-2" type='button' onClick={this.AddCourse}> Add Course</button>
                     </form>
                 </nav>
-                <table className="table table-hover" id='table'>
+                <table className="table table-hover container-fluid" id='table'>
                     <TableHead sortbycreated={this.sortbycreatedate} sortbydatemodified={this.sortbydatemodified}/>
                     <tbody id="tbody">
 
