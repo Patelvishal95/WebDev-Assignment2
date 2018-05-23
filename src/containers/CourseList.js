@@ -3,6 +3,7 @@ import CourseRow from '../components/CourseRow';
 import CourseServiceClient from '../services/CourseServiceClient';
 import TableHead from '../components/TableHead';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import CourseEditor from "./CourseEditor";
 
 class CourseList extends React.Component {
 
@@ -18,6 +19,7 @@ class CourseList extends React.Component {
         this.sortbydatemodified=this.sortbydatemodified.bind(this);
         this.createdflag=0;
         this.modifiedflag=0;
+        this.sorted=0;
     }
     componentDidMount() {
         this.findAllCourses();
@@ -43,14 +45,73 @@ class CourseList extends React.Component {
         console.log(id)
     }
     courseRows() {
+        console.log(this.sorted)
+        var rows;
+        if((this.sorted%2)==0) {
+            rows = this.state.courses.map(function (course) {
+                return <CourseRow date='' datecount='' key={course.id} course={course} courseclicked={this.courseClicked}
+                                  deletefunction={this.onClick}/>
+            }, this);
+        }
+        else
+        {
 
-        var rows = this.state.courses.map(function(course) {
-            return <CourseRow key={course.id} course={course} courseclicked={this.courseClicked} deletefunction={this.onClick} />
-        },this);
+            var yesterday = this.addDays(new Date(),-1)
+            var lastweek = this.addDays(new Date(),-7)
+            var sixmonthsago = ( this.addMonths(new Date(), -6));
+            var yearago =  this.addMonths(new Date(), -12)
+
+            var yesterdaycount = 0
+            var lastweekcount = 0
+            var sixmonthsagocount = 0
+            var yearagocount =0
+
+            rows = this.state.courses.map(function (course) {
+                if(new Date(course.created).getTime()>yesterday){
+                    yesterdaycount++;
+                    console.log("yesterdaycount")
+                    console.log(yesterdaycount)
+                   return (<CourseRow key={course.id} date='yesterday' datecount={yesterdaycount}course={course} courseclicked={this.courseClicked}
+                                            deletefunction={this.onClick}/>)
+
+                }
+                if(new Date(course.created).getTime()>lastweek){
+                    lastweekcount++;
+                    console.log("lastweekcount")
+                    console.log(lastweekcount)
+                    return (<CourseRow key={course.id} date='lastweek' course={course} datecount={lastweekcount} courseclicked={this.courseClicked}
+                                            deletefunction={this.onClick}/>)
+
+                }
+                if(new Date(course.created).getTime()>sixmonthsago){
+                    sixmonthsagocount++;
+                    console.log("sixmonthsagocount")
+                    console.log(sixmonthsagocount)
+                    return (<CourseRow key={course.id} date='sixmonthsago' course={course}  datecount={sixmonthsagocount}courseclicked={this.courseClicked}
+                                            deletefunction={this.onClick}/>)
+
+                }
+                if(new Date(course.created).getTime()>yearago){
+                    yearagocount++;
+                    console.log("yearagocount")
+                    console.log(yearagocount)
+                    return (<CourseRow key={course.id} date='yearago' course={course} datecount={yearagocount} courseclicked={this.courseClicked}
+                                            deletefunction={this.onClick}/>)
+
+                }
+            }, this,yesterday,lastweek,sixmonthsago,yearago,yesterdaycount,lastweekcount,sixmonthsagocount,yearagocount);
+        }
         return (
             rows
         )}
-
+    addMonths(date, months) {
+        date.setMonth(date.getMonth() + months);
+        return date;
+    }
+    addDays(date, days) {
+        date.setDate(date.getDate() + days);
+        return date;
+    }
     AddCourse(course){
         this.courseService
             .createCourse(this.state.course)
@@ -83,6 +144,7 @@ sortbycreatedate(){
         });
         this.setState({courses:array})
     }
+    this.sorted++;
 }
 sortbydatemodified(){
     if(((this.modifiedflag++)%2) === 0) {
@@ -102,6 +164,7 @@ sortbydatemodified(){
             return a>b ? 1 : a<b ? -1 : 0;
         });
         this.setState({courses:array})
+
     }
 }
     render() {
