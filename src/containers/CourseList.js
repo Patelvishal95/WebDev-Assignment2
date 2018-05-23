@@ -45,7 +45,6 @@ class CourseList extends React.Component {
         console.log(id)
     }
     courseRows() {
-        console.log(this.sorted)
         var rows;
         if((this.sorted%2)==0) {
             rows = this.state.courses.map(function (course) {
@@ -68,25 +67,21 @@ class CourseList extends React.Component {
 
             rows = this.state.courses.map(function (course) {
                 if(new Date(course.created).getTime()>yesterday){
-                    // yesterdaycount++;
                    return (<CourseRow key={course.id} date='Yesterday' datecount={yesterdaycount++}course={course} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>lastweek){
-                    // lastweekcount++;
                     return (<CourseRow key={course.id} date='Last Week - Six Months' course={course} datecount={lastweekcount++} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>sixmonthsago){
-                    // sixmonthsagocount++;
                     return (<CourseRow key={course.id} date='Six Months - Year' course={course}  datecount={sixmonthsagocount++}courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
                 }
                 if(new Date(course.created).getTime()>yearago){
-                    // yearagocount++;
                     return (<CourseRow key={course.id} date='One Year Ago' course={course} datecount={yearagocount++} courseclicked={this.courseClicked}
                                             deletefunction={this.onClick}/>)
 
@@ -116,6 +111,21 @@ class CourseList extends React.Component {
                 modified:new Date()
             }
         });
+
+        this.findAllCoursesSearch(event.target.value);
+    }
+    findAllCoursesSearch(searchString){
+        this.courseService
+            .findAllCourses().then((courses) => {
+        var newcourses = [];
+        for( var course in courses){
+            if(courses[course].title.includes(searchString)){
+                newcourses.push(courses[course])
+            }
+        }
+        this.setState({courses:newcourses});
+            }
+        )
     }
 sortbycreatedate(){
     if(((this.createdflag++)%2) === 0) {
@@ -138,7 +148,7 @@ sortbycreatedate(){
     }
     this.sorted++;
 }
-sortbydatemodified(){
+    sortbydatemodified(){
     if(((this.modifiedflag++)%2) === 0) {
         var array = this.state.courses;
         array.sort(function(a, b) {

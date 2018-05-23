@@ -4,14 +4,14 @@ const MODULE_API_URL_DELETE =
     'http://localhost:8080/api/module/MID';
 
 let _singleton = Symbol();
-export default class ModuleServiceRename {
+export default class ModuleServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Singleton!!!');
     }
     static get instance() {
         if(!this[_singleton])
-            this[_singleton] = new ModuleServiceRename(_singleton);
+            this[_singleton] = new ModuleServiceClient(_singleton);
         return this[_singleton]
     }
 
@@ -40,6 +40,10 @@ export default class ModuleServiceRename {
                 method: 'DELETE'
             });
     }
-
+    findAllModules(){
+        return fetch('/api/module').then(function (response) {
+            return response.json();
+        })
+    }
 
 }

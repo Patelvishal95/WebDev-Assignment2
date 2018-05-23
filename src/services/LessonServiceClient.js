@@ -2,7 +2,7 @@ let _singleton = Symbol();
 
 const LESSON_API_URL = 'http://localhost:8080/api/module/MID/lesson';
 
-export default class LessonServiceRename {
+export default class LessonServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
@@ -10,11 +10,11 @@ export default class LessonServiceRename {
 
     static get instance() {
         if (!this[_singleton])
-            this[_singleton] = new LessonServiceRename(_singleton);
+            this[_singleton] = new LessonServiceClient(_singleton);
         return this[_singleton]
     }
 
-    findAllLesson(moduleId){
+    findAllLessonforModule(moduleId){
         return fetch(LESSON_API_URL.replace('MID',moduleId))
             .then(function (response){return response.json()});
     }
@@ -31,5 +31,11 @@ export default class LessonServiceRename {
             {
                 method: 'DELETE'
             })
+    }
+    findAllLessons(){
+        return fetch('/api/lesson').then(function (response) {
+            return response.json();
+
+        })
     }
 }

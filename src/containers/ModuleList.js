@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ModuleListItem from '../components/ModuleListItem';
-import ModuleServiceRename from '../services/ModuleServiceRename'
+import ModuleServiceClient from '../services/ModuleServiceClient'
 
 export default class ModuleList extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class ModuleList extends Component {
         this.setCourseId =
             this.setCourseId.bind(this);
 
-        this.moduleService = ModuleServiceRename.instance;
+        this.moduleService = ModuleServiceClient.instance;
     }
     setModules(modules) {
         this.setState({modules: modules})

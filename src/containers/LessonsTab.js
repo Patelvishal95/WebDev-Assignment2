@@ -1,11 +1,11 @@
 import React from 'react'
-import LessonServiceRename from '../services/LessonServiceRename'
+import LessonServiceClient from '../services/LessonServiceClient'
 export default class LessonTabs
     extends React.Component {
 
     constructor(){
         super();
-        this.lessonService = LessonServiceRename.instance;
+        this.lessonService = LessonServiceClient.instance;
         this.addLesson = this.addLesson.bind(this);
         this.lessonSelected = this.lessonSelected.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
@@ -28,7 +28,7 @@ export default class LessonTabs
     }
 
     findAllLesson(moduleId){
-        this.lessonService.findAllLesson(moduleId).then(
+        this.lessonService.findAllLessonforModule(moduleId).then(
              (response) => {
                 this.setState({Lessson:response});
 
