@@ -13,14 +13,12 @@ export default class ModuleList extends Component {
                 {title: 'Module 1', id: 123},
                 {title: 'Module 2', id: 234},
                 {title: 'Module 3', id: 345},
-                {title: 'Module 4', id: 456},
-                {title: 'Module 5', id: 567},
-                {title: 'Module 6', id: 678}
+                {title: 'Module 4', id: 456}
             ]
         };
         this.createModule = this.createModule.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
-        this.moduleSelector = this.moduleSelector.bind(this);
+        this.onModuleDelete = this.onModuleDelete.bind(this);
         this.setCourseId =
             this.setCourseId.bind(this);
 
@@ -32,7 +30,8 @@ export default class ModuleList extends Component {
     findAllModulesForCourse(courseId) {
         this.moduleService
             .findAllModulesForCourse(courseId)
-            .then((modules) => {this.setModules(modules)});
+            .then((modules) => {
+                this.setModules(modules)});
     }
 
     setCourseId(courseId) {
@@ -47,26 +46,26 @@ export default class ModuleList extends Component {
     }
 
     createModule() {
-        console.log(this.state.module);
         this.moduleService
-            .createModule(this.props.courseId, this.state.module)
+            .createModule(this.props.courseId, this.state.module).then(
+            () => this.findAllModulesForCourse(this.state.courseId));
     }
     titleChanged(event) {
-        console.log(event.target.value);
         this.setState({module: {title: event.target.value}});
     }
-    moduleSelector(id){
-        console.log("module selected");
-        console.log(id);
-        this.setState({moduleSelected:id});
-    }
+
     renderListOfModules() {
         let modules = this.state.modules.map(function(module){
-            return <ModuleListItem moduleclicked={this.moduleSelector} module={module}
+            return <ModuleListItem courseId={this.state.courseId} onModuleDelete={this.onModuleDelete} module={module}
                                    id={module.id}/>
         },this);
         return modules;
     }
+    onModuleDelete(moduleid){
+        this.moduleService
+            .deleteModule(moduleid).then(() => {this.findAllModulesForCourse(this.state.courseId)});
+    }
+
 
 
     render() {

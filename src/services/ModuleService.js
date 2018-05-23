@@ -9,6 +9,11 @@ export default class ModuleService {
         if (_singleton !== singletonToken)
             throw new Error('Singleton!!!');
     }
+    static get instance() {
+        if(!this[_singleton])
+            this[_singleton] = new ModuleService(_singleton);
+        return this[_singleton]
+    }
 
     findAllModulesForCourse(courseId) {
         return fetch(
@@ -36,9 +41,5 @@ export default class ModuleService {
             });
     }
 
-    static get instance() {
-        if(!this[_singleton])
-            this[_singleton] = new ModuleService(_singleton);
-        return this[_singleton]
-    }
+
 }
