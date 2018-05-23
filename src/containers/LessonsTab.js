@@ -1,11 +1,11 @@
 import React from 'react'
-import LessonService from '../services/LessonService'
+import LessonServiceRename from '../services/LessonServiceRename'
 export default class LessonTabs
     extends React.Component {
 
     constructor(){
         super();
-        this.lessonService = LessonService.instance;
+        this.lessonService = LessonServiceRename.instance;
         this.addLesson = this.addLesson.bind(this);
         this.lessonSelected = this.lessonSelected.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
@@ -73,23 +73,28 @@ export default class LessonTabs
     }
     renderListofLessons(){
         let lessons = this.state.Lessson.map(function(lesson){
-            if(this.state.highlight===lesson.id){return  <li className="nav-item"><a className="nav-link active" onClick={this.lessonSelected}
-                                                                                     href="#" id={lesson.id}>{lesson.title}<i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}></i></a></li>;}
+            if(this.state.highlight==lesson.id){
+                return  <li className="nav-item bg-secondary">
+                    <a className="text-white nav-link active" onClick={this.lessonSelected}
+                       href="#" id={lesson.id}>{lesson.title}
+                       <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/>
+                    </a></li>;}
+
             else{
-            return  <li className="nav-item"><a className="nav-link" onClick={this.lessonSelected}
-                                                href="#" id={lesson.id}>{lesson.title}<i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}></i></a></li>;}
+            return  <li className="nav-item">
+                <a className="text-white nav-link" onClick={this.lessonSelected}
+                                                href="#" id={lesson.id}>{lesson.title}
+                 <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/></a></li>;}
         },this);
         return lessons;
     }
     render() {
         return(
-        <ul className="nav nav-tabs">
-            {/*<li className="nav-item"><a className="nav-link active"*/}
-                                        {/*href="#">Module is {this.state.moduleId} </a></li>*/}
+        <ul className=" nav">
             {this.renderListofLessons()}
-            <li className="nav-item pt-2 pl-1">
-                <input className="nav-item" id="moduleid"/>
-                <i className="fa fa-plus btn" on onClick={this.addLesson}/>
+            <li className="nav-item pt-2 pl-1" >
+                <input placeholder="Lesson Name" className="nav-item" id="moduleid"/>
+                <i className="pb-1 fa fa-plus btn bg-white" on onClick={this.addLesson}/>
             </li>
         </ul>
     );}}

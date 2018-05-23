@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseRow from '../components/CourseRow';
-import CourseService from '../services/CourseService';
+import CourseServiceClient from '../services/CourseServiceClient';
 import TableHead from '../components/TableHead';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ class CourseList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.courseService = CourseService.instance;
+        this.courseService = CourseServiceClient.instance;
         this.state = {courses: []};
         this.onClick = this.onClick.bind(this);
 

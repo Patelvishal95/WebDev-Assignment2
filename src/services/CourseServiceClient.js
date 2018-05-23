@@ -1,13 +1,13 @@
 let _singleton = Symbol();
 const COURSE_API_URL = 'http://localhost:8080/api/course';//later change this to heroku url
-class CourseService {
+class CourseServiceClient {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
     static get instance() {
         if(!this[_singleton])
-            this[_singleton] = new CourseService(_singleton);
+            this[_singleton] = new CourseServiceClient(_singleton);
         return this[_singleton]
     }
     findAllCourses() {
@@ -32,7 +32,7 @@ class CourseService {
             method: 'DELETE'
         })
     }
-    getCourseName(Id){
+    findCourseById(Id){
         console.log("in get course name");
         return fetch(COURSE_API_URL.concat('/').concat(Id)).then(function (response){
             return response.json()
@@ -41,4 +41,4 @@ class CourseService {
 
 
 }
-export default CourseService;
+export default CourseServiceClient;

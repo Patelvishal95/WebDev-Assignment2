@@ -2,7 +2,7 @@ let _singleton = Symbol();
 
 const LESSON_API_URL = 'http://localhost:8080/api/module/MID/lesson';
 
-export default class LessonService {
+export default class LessonServiceRename {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
@@ -10,7 +10,7 @@ export default class LessonService {
 
     static get instance() {
         if (!this[_singleton])
-            this[_singleton] = new LessonService(_singleton);
+            this[_singleton] = new LessonServiceRename(_singleton);
         return this[_singleton]
     }
 

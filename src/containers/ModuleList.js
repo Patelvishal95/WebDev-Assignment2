@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ModuleListItem from '../components/ModuleListItem';
-import ModuleService from '../services/ModuleService'
+import ModuleServiceRename from '../services/ModuleServiceRename'
 
 export default class ModuleList extends Component {
     constructor(props) {
@@ -11,9 +11,6 @@ export default class ModuleList extends Component {
             module: { title: '' },
             modules: [
                 {title: 'Module 1', id: 123},
-                {title: 'Module 2', id: 234},
-                {title: 'Module 3', id: 345},
-                {title: 'Module 4', id: 456}
             ]
         };
         this.createModule = this.createModule.bind(this);
@@ -22,7 +19,7 @@ export default class ModuleList extends Component {
         this.setCourseId =
             this.setCourseId.bind(this);
 
-        this.moduleService = ModuleService.instance;
+        this.moduleService = ModuleServiceRename.instance;
     }
     setModules(modules) {
         this.setState({modules: modules})
@@ -74,7 +71,7 @@ export default class ModuleList extends Component {
                 {/*<h3>Module List for course: {this.state.courseId}</h3>*/}
                 <input onChange={this.titleChanged}
                        value={this.state.module.title}
-                       placeholder="title"
+                       placeholder="Module Name"
                        className="form-control"/>
                 <button onClick={this.createModule} className="btn btn-primary btn-block">
                     <i className="fa fa-plus"></i>
