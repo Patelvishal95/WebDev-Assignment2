@@ -26,4 +26,10 @@ export default class LessonService {
                 method: 'POST'
             })
     }
+    deleteLesson(lessonId,moduleId){
+        return fetch(LESSON_API_URL.replace('MID',moduleId).concat('/').concat(lessonId),
+            {
+                method: 'DELETE'
+            })
+    }
 }

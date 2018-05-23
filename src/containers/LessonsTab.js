@@ -8,6 +8,7 @@ export default class LessonTabs
         this.lessonService = LessonService.instance;
         this.addLesson = this.addLesson.bind(this);
         this.lessonSelected = this.lessonSelected.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this);
         this.state = {
             highlight:'',
             courseId:'',
@@ -27,10 +28,8 @@ export default class LessonTabs
     }
 
     findAllLesson(moduleId){
-        console.log("in find all lesson")
         this.lessonService.findAllLesson(moduleId).then(
              (response) => {
-                console.log(response);
                 this.setState({Lessson:response});
 
             }
@@ -53,6 +52,7 @@ export default class LessonTabs
             }
         });
         var toadd = event.target.parentNode.childNodes[0].value;
+        console.log(toadd)
         if(toadd===''){
             toadd = 'Lesson Template'
         }
@@ -62,16 +62,22 @@ export default class LessonTabs
                 },this.state.moduleId).then(() => {this.findAllLesson(this.state.moduleId)});
     }
     lessonSelected(event){
-        console.log(event.target)
         this.setState({highlight:event.target.getAttribute('id')})
+    }
+    deleteLesson(event){
+        var confirmation = window.confirm("Are you sure you want to delete "+event.target.parentNode.getAttribute('id'))
+        if(confirmation)
+        {console.log(event.target.parentNode.getAttribute('id'));
+        this.lessonService.deleteLesson(event.target.parentNode.getAttribute('id'),this.state.moduleId)
+            .then(()=>(this.findAllLesson(this.state.moduleId)));}
     }
     renderListofLessons(){
         let lessons = this.state.Lessson.map(function(lesson){
             if(this.state.highlight===lesson.id){return  <li className="nav-item"><a className="nav-link active" onClick={this.lessonSelected}
-                                                                                     href="#" id={lesson.id}>{lesson.title}</a></li>;}
+                                                                                     href="#" id={lesson.id}>{lesson.title}<i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}></i></a></li>;}
             else{
             return  <li className="nav-item"><a className="nav-link" onClick={this.lessonSelected}
-                                                href="#" id={lesson.id}>{lesson.title}</a></li>;}
+                                                href="#" id={lesson.id}>{lesson.title}<i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}></i></a></li>;}
         },this);
         return lessons;
     }

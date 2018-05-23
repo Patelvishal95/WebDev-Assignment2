@@ -3,16 +3,24 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
 import ModuleList from './ModuleList';
 import LessonTabs from './LessonsTab';
-
+import CourseService from '../services/CourseService';
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {courseId: '',
-            moduleId:''};
+            moduleId:'',courseName:''};
+        this.courseService= CourseService.instance;
         this.selectCourse = this.selectCourse.bind(this);
-
+        this.getCourseName();
     }
 
+    getCourseName(){
+        this.courseService
+            .getCourseName(this.props.match.params.courseId).then( (response) =>{
+            this.setState({courseName:response.title});
+            console.log("after set state")
+        })
+    }
     componentWillReceiveProps (){
         this.selectCourse
         (this.props.match.params.courseId);
@@ -28,9 +36,9 @@ class CourseEditor extends React.Component {
     render() { return(
         <Router>
             <div>
-            <h2>Editing course: {this.state.courseId}</h2>
+            <h2 className="navbar navbar-light bg-dark text-light">Course: {this.state.courseName}</h2>
 
-            <div className="row">
+            <div className="row ">
                 <div className="col-3">
                     <ModuleList selectedmodule = {this.selectedModule} courseId={this.state.courseId}/>
                 </div>

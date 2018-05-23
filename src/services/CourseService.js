@@ -13,7 +13,6 @@ class CourseService {
     findAllCourses() {
         return fetch(COURSE_API_URL)
             .then(function(response){
-                console.log(response);
                 return response.json();
             });
     }
@@ -33,6 +32,13 @@ class CourseService {
             method: 'DELETE'
         })
     }
+    getCourseName(Id){
+        console.log("in get course name");
+        return fetch(COURSE_API_URL.concat('/').concat(Id)).then(function (response){
+            return response.json()
+            });
+        }
+
 
 }
 export default CourseService;

@@ -14,6 +14,10 @@ class CourseList extends React.Component {
 
         this.titleChanged = this.titleChanged.bind(this);
         this.AddCourse = this.AddCourse.bind(this);
+        this.sortbycreatedate =this.sortbycreatedate.bind(this);
+        this.sortbydatemodified=this.sortbydatemodified.bind(this);
+        this.createdflag=0;
+        this.modifiedflag=0;
     }
     componentDidMount() {
         this.findAllCourses();
@@ -60,7 +64,46 @@ class CourseList extends React.Component {
             }
         });
     }
-
+sortbycreatedate(){
+    if(((this.createdflag++)%2) === 0) {
+        var array = this.state.courses;
+    array.sort(function(a, b) {
+        a = new Date(a.created);
+        b = new Date(b.created);
+        return a>b ? -1 : a<b ? 1 : 0;
+    });
+    this.setState({courses:array})
+    }
+    else{
+        var array = this.state.courses;
+        array.sort(function(a, b) {
+            a = new Date(a.created);
+            b = new Date(b.created);
+            return a>b ? 1 : a<b ? -1 : 0;
+        });
+        this.setState({courses:array})
+    }
+}
+sortbydatemodified(){
+    if(((this.modifiedflag++)%2) === 0) {
+        var array = this.state.courses;
+        array.sort(function(a, b) {
+            a = new Date(a.modified);
+            b = new Date(b.modified);
+            return a>b ? -1 : a<b ? 1 : 0;
+        });
+        this.setState({courses:array})
+    }
+    else{
+        var array = this.state.courses;
+        array.sort(function(a, b) {
+            a = new Date(a.modified);
+            b = new Date(b.modified);
+            return a>b ? 1 : a<b ? -1 : 0;
+        });
+        this.setState({courses:array})
+    }
+}
     render() {
 
         return (
@@ -76,7 +119,7 @@ class CourseList extends React.Component {
                     </form>
                 </nav>
                 <table className="table table-hover" id='table'>
-                    <TableHead/>
+                    <TableHead sortbycreated={this.sortbycreatedate} sortbydatemodified={this.sortbydatemodified}/>
                     <tbody id="tbody">
 
                     {this.courseRows()}
