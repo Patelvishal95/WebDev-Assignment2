@@ -1,10 +1,17 @@
 import React from 'react';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
-
+import {widgetReducer} from "../reducers/widgetReducer"
+import {Provider, connect} from 'react-redux'
+import {createStore} from 'redux'
+import App from '../containers/widgetList'
 import ModuleList from './ModuleList';
 import LessonTabs from './LessonsTab';
 import CourseServiceClient from '../services/CourseServiceClient';
+
+
+let store = createStore(widgetReducer);
 class CourseEditor extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {courseId: '',
@@ -51,7 +58,11 @@ class CourseEditor extends React.Component {
                     <ModuleList selectedmodule = {this.selectedModule} courseId={this.state.courseId}/>
                 </div>
                 <div className="col-9 mt-2 bg-light mh-100">
-                        <h3>Topics here</h3>
+                    <Provider store={store}>
+                    <Route path="/course/:courseId/edit/:moduleId/lesson/:lessonId"
+                    component={App}>
+                    </Route>
+                    </Provider>
                 </div>
 
             </div>

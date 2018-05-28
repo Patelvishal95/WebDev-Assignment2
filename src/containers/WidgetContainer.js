@@ -50,7 +50,7 @@ const dispatcherToPropsMapper
     deleteWidget: (widget) => actions.deleteWidget(dispatch,widget),
     increaseOrder:(widget) => {actions.increaseOrder(dispatch,widget)
         actions.sortWidgets(dispatch)    },
-    decreaseOrder:(widget) => {actions.decreaseOrder(dispatch,widget)
+    decreaseOrder:(widget) => { actions.decreaseOrder(dispatch,widget)
         actions.sortWidgets(dispatch)   },
     selectWidgetType:(widget,selectElement) => actions.selectWidgetType(dispatch,widget,selectElement)
 })

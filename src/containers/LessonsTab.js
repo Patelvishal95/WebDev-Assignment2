@@ -1,5 +1,8 @@
 import React from 'react'
 import LessonServiceClient from '../services/LessonServiceClient'
+import App from '../containers/widgetList'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+
 export default class LessonTabs
     extends React.Component {
 
@@ -25,6 +28,7 @@ export default class LessonTabs
         this.selectModule
         (this.props.match.params.moduleId);
         this.findAllLesson(this.props.match.params.moduleId);
+        this.setState({courseId:this.props.match.params.courseId})
     }
 
     findAllLesson(moduleId){
@@ -76,14 +80,18 @@ export default class LessonTabs
             if(this.state.highlight==lesson.id){
                 return  <li className="nav-item bg-secondary">
                     <a className="text-white nav-link active" onClick={this.lessonSelected}
-                       href="#" id={lesson.id}>{lesson.title}
+                       href="#" id={lesson.id}>
+                        <Link to={`/course/${this.state.courseId}/edit/${this.state.moduleId}/lesson/${lesson.id}`}
+                              component={App}>{lesson.title}</Link>
                        <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/>
                     </a></li>;}
 
             else{
             return  <li className="nav-item">
                 <a className="text-white nav-link" onClick={this.lessonSelected}
-                                                href="#" id={lesson.id}>{lesson.title}
+                                                href="#" id={lesson.id}>
+                    <Link to={`/course/${this.state.courseId}/edit/${this.state.moduleId}/lesson/${lesson.id}`}
+                          component={App}>{lesson.title}</Link>
                  <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/></a></li>;}
         },this);
         return lessons;

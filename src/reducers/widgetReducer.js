@@ -175,9 +175,9 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                     widgets:state.widgets.map(widget => {
                         return Object.assign({}, widget)
                     })
-                }
-            }
+                }}
             else {
+
                 return {
                     widgets: state.widgets.map(widget => {
                         if (widget.order1 === action.order1) {
