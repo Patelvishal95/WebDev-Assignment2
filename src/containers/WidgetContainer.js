@@ -8,12 +8,12 @@ import ListContainer from './ListContainer'
 import ImageContainer from './ImageContainer'
 import LinkContainer from './LinkContainer'
 import * as actions from "../actions";
-
+// if(preview){return 'list-group-item mt-2'}else{return 'mt-2'}
 const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increaseOrder,decreaseOrder,selectWidgetType}) => {
     let selectElement
     return(
-        <li className="list-group-item m-2">
-            <div hidden={preview}>
+        <li className={'mt-2' + (preview ? '' : ' list-group-item')}>
+            <div hidden={preview} className="mt-3">
                 {/*{widget.id} {widget.className}*/}
                 {/*{console.log("length "+widgets.length)}*/}
                 <button className="m-1 btn btn-sm btn-danger float-right fa fa-close" onClick={() =>deleteWidget(widget)}> </button>
@@ -27,23 +27,26 @@ const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increas
                     <option>Link</option>
                 </select>
                 { widget.order1!==1 &&
-                <button className=" m-1 bg-warning fa fa-arrow-up float-right"
+                <button className="btn m-1 bg-warning fa fa-arrow-up float-right"
                                  onClick={() => ( decreaseOrder(widget))}/>}
                 { widget.order1!==widgets.length &&
-                <button className=" mt-1 bg-warning fa fa-arrow-down float-right"
+                <button className="btn mt-1 bg-warning fa fa-arrow-down float-right"
                         onClick={() => (increaseOrder(widget))}/> }
-
-
-
-
             </div>
-            <div className='border m-2 container-fluid'>
+            {preview && <div className='m-2 container-fluid'>
                 {widget.className==='Heading' && <HeadingContainer widget={widget}/>}
                 {widget.className==='Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.className==='List' && <ListContainer widget={widget}/>}
                 {widget.className==='Image' && <ImageContainer widget={widget}/>}
                 {widget.className==='Link' && <LinkContainer widget={widget}/>}
-            </div>
+            </div>}{!preview && <div className='border m-2 container-fluid'>
+            {widget.className==='Heading' && <HeadingContainer widget={widget}/>}
+            {widget.className==='Paragraph' && <ParagraphContainer widget={widget}/>}
+            {widget.className==='List' && <ListContainer widget={widget}/>}
+            {widget.className==='Image' && <ImageContainer widget={widget}/>}
+            {widget.className==='Link' && <LinkContainer widget={widget}/>}
+        </div>}
+
         </li>
     )
 }

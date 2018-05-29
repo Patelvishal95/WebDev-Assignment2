@@ -1,7 +1,7 @@
 import React from 'react'
 import LessonServiceClient from '../services/LessonServiceClient'
 import App from '../containers/widgetList'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default class LessonTabs
     extends React.Component {

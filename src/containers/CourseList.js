@@ -2,8 +2,6 @@ import React from 'react';
 import CourseRow from '../components/CourseRow';
 import CourseServiceClient from '../services/CourseServiceClient';
 import TableHead from '../components/TableHead';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
-import CourseEditor from "./CourseEditor";
 
 class CourseList extends React.Component {
 

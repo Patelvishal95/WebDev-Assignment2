@@ -104,14 +104,15 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                     if (widget.id === action.id) {
                         widget.className = action.className
                         if (widget.className == 'List') {
-                            widget.listType = 1;
+                            widget.listType = 'Unordered';
+                            widget.text = '';
                         }
                         if (widget.className == 'Image') {
-                            widget.src = 'http://tinypic.com/r/2wd0ojl'
+                            widget.src = ''
                         }
                         if (widget.className == 'Link') {
-                            widget.href = 'http://www.google.com'
-                            widget.name = 'Google'
+                            widget.href = ''
+                            widget.name = ''
                         }
                     }
                     return true;
@@ -210,9 +211,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                     {
                         id: state.widgets.length + 1,
                         order1: state.widgets.length + 1,
-                        text: 'New Widget',
-                        className: 'Paragraph',
-                        size: '2'
+                        className: 'Heading',
+                        size: '1'
                     }
                 ]
             }
