@@ -7,25 +7,18 @@ class WidgetList extends Component {
 
     constructor(props) {
         super(props)
+
         this.props.findAllWidgets(this.props.match.params.lessonId)
-        this.state = {selectlesson: ''};
-        this.setState({selectlesson:this.props.match.params.lessonId})
+        this.state = {lessonId: ''};
+        this.setState({lessonId:this.props.match.params.lessonId})
         this.save=this.save.bind(this);
     }
-    componentDidUpdate (newprops){
-        console.log('in comns')
-        if(newprops.match.params.lessonId!=this.state.selectlesson){
-            this.runafterstatechange(newprops)
-        }
-    }
-    runafterstatechange(newprops){
-        this.setState({selectlesson:newprops.match.params.lessonId}),
-            console.log("in find all widgets"),
-            this.props.findAllWidgets(newprops.match.params.lessonId)
-
+    componentDidUpdate(newprops){
+        if(this.props.match.params.lessonId!==newprops.match.params.lessonId){
+        this.props.findAllWidgets(this.props.match.params.lessonId)}
     }
     save(){
-        this.props.save(this.state.selectlesson);
+        this.props.save(this.props.match.params.lessonId);
     }
     render() {
         return(
@@ -62,7 +55,8 @@ class WidgetList extends Component {
 
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgets,
-    previewMode: state.preview
+    previewMode: state.preview,
+    lessonId:state.lessonId
 })
 const dispatcherToPropsMapper
     = dispatch => ({
