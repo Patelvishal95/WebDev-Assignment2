@@ -53,11 +53,11 @@ export const findAllWidgets = (dispatch,lessonId) => {
     console.log("in find all widgets")
     console.log(lessonId)
   fetch('http://localhost:8080/api/widget/'+lessonId)
-    .then(response => {console.log(response.json)
-    response.json()})
+    .then(response => (
+    response.json())
     .then(widgets => dispatch({
       type: constants.FIND_ALL_WIDGETS,
-      widgets: widgets }))
+      widgets: widgets })))
 }
 export const addWidget = dispatch => (
   dispatch({type: constants.ADD_WIDGET})

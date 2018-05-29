@@ -9,13 +9,13 @@ import ImageContainer from './ImageContainer'
 import LinkContainer from './LinkContainer'
 import * as actions from "../actions";
 
-const WidgetContainer = ({widget, preview, dispatch,deleteWidget,increaseOrder,decreaseOrder,selectWidgetType}) => {
+const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increaseOrder,decreaseOrder,selectWidgetType}) => {
     let selectElement
     return(
         <li className="list-group-item m-2">
             <div hidden={preview}>
                 {/*{widget.id} {widget.className}*/}
-
+                {/*{console.log("length "+widgets.length)}*/}
                 <button className="m-1 btn btn-sm btn-danger float-right fa fa-close" onClick={() =>deleteWidget(widget)}> </button>
                 <select className="m-1 float-right" value={widget.className}
                         onChange={e => selectWidgetType(widget,selectElement)
@@ -26,10 +26,12 @@ const WidgetContainer = ({widget, preview, dispatch,deleteWidget,increaseOrder,d
                     <option>Image</option>
                     <option>Link</option>
                 </select>
+                { widget.order1!==1 &&
                 <button className=" m-1 bg-warning fa fa-arrow-up float-right"
-                                 onClick={() => ( decreaseOrder(widget))}> </button>
+                                 onClick={() => ( decreaseOrder(widget))}/>}
+                { widget.order1!==widgets.length &&
                 <button className=" mt-1 bg-warning fa fa-arrow-down float-right"
-                        onClick={() => (increaseOrder(widget))}> </button>
+                        onClick={() => (increaseOrder(widget))}/> }
 
 
 
@@ -56,6 +58,7 @@ const dispatcherToPropsMapper
     selectWidgetType:(widget,selectElement) => actions.selectWidgetType(dispatch,widget,selectElement)
 })
 const WidgetContainerconnect = connect((state => ({
-    preview: state.preview
+    preview: state.preview,
+    widgets:state.widgets
 })), dispatcherToPropsMapper)(WidgetContainer)
 export default WidgetContainerconnect

@@ -7,17 +7,21 @@ class WidgetList extends Component {
 
   constructor(props) {
     super(props)
-      console.log("in constructor")
     this.props.findAllWidgets(this.props.match.params.lessonId)
       this.state = {selectlesson: ''};
       this.setState({selectlesson:this.props.match.params.lessonId})
       this.save=this.save.bind(this);
   }
-    componentWillReceiveProps (newprops){
-       console.log("in components will receive props in widgetlist")
-        console.log(newprops.match.params.lessonId)
+    componentDidUpdate (newprops){
+      console.log('in comns')
+        if(newprops.match.params.lessonId!=this.state.selectlesson){
+          this.runafterstatechange(newprops)
+          }
+    }
+    runafterstatechange(newprops){
+        this.setState({selectlesson:newprops.match.params.lessonId}),
+            console.log("in find all widgets"),
         this.props.findAllWidgets(newprops.match.params.lessonId)
-        this.setState({selectlesson:newprops.match.params.lessonId})
 
     }
     save(){
@@ -28,7 +32,7 @@ class WidgetList extends Component {
       <div className="container">
           <div className="row">
         <h1>Widget List {this.props.widgets.length}</h1>
-              <h1>Selected lesson {this.state.selectlesson}</h1>
+              {/*<h1>Selected lesson {this.state.selectlesson}</h1>*/}
           <button  type="button" className="btn btn-toggle" data-toggle="button" aria-pressed="false"
                    onClick={this.props.preview}>
               Preview

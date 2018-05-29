@@ -18,7 +18,7 @@ const Link = ({widget, preview, linkURLChanged,linkTextChanged}) =>
                 <input onChange={() => linkTextChanged(widget.id, inputelem.value)}
                           value={widget.name}
                           ref={node => inputelem = node}/>
-                <h3>Preview</h3>
+                <h4>Preview</h4>
             </div>
 
             <a href={widget.href} target="_blank"> {widget.name}</a>

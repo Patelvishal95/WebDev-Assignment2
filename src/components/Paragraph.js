@@ -1,7 +1,6 @@
 import React from  'react'
 
 const Paragraph = ({widget, preview, paragraphTextChanged}) => {
-    let selectElem
     let inputElem
     return(
 
@@ -11,7 +10,7 @@ const Paragraph = ({widget, preview, paragraphTextChanged}) => {
                 <input  onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
                        value={widget.text}
                        ref={node => inputElem = node}/>
-                <h3>Preview</h3>
+                <h4>Preview</h4>
             </div>
             <p>{widget.text}</p>
 

@@ -21,13 +21,13 @@ const List = ({widget, preview, listTextChanged, listTypeChanged}) =>
              onChange={() => listTypeChanged(widget.id, selectElem.value)}
          value={widget.listType}
          ref={node => selectElem = node}>
-         <option value="1">Unordered list</option>
-         <option value="2">Ordered List</option>
+         <option value="Unordered">Unordered list</option>
+         <option value="Ordered">Ordered List</option>
      </select>
          <h3>Preview</h3>
      </div>
-     {widget.listType == 1 && <ul>{renderlist(widget.text)}</ul>}
-     {widget.listType == 2 && <ol>{renderlist(widget.text)}</ol>}
+     {widget.listType === 'Unordered' && <ul>{renderlist(widget.text)}</ul>}
+     {widget.listType === 'Ordered' && <ol>{renderlist(widget.text)}</ol>}
 
 
 </div>

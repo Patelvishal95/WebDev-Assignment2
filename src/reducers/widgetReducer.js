@@ -141,10 +141,24 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             }
 
         case constants.DELETE_WIDGET:
+            let newStatewidgets = Object.assign({}, state)
+            let order=0
+            let widgets = state.widgets.filter(widget =>(
+                widget.id!==action.id
+        ));
+            newStatewidgets.widgets.map(widget =>{
+                if(widget.id === action.id){
+                    order=widget.order1;
+                }
+            })
             return {
-                widgets: state.widgets.filter(widget => (
-                    widget.id !== action.id
-                ))
+                widgets: widgets.map(widget => {
+                    if(widget.order1>order){
+                        widget.order1=widget.order1-1;
+                        return Object.assign({}, widget)
+                    }
+                        return Object.assign({}, widget)
+    }           )
             }
         case constants.INCREASE_ORDER_WIDGET:
             console.log(state)

@@ -1,7 +1,6 @@
 import React from  'react'
 
 const Image = ({widget, preview, imageURLChanged}) => {
-    let selectElem
     let inputElem
     return(
 
@@ -14,7 +13,7 @@ const Image = ({widget, preview, imageURLChanged}) => {
                 <input  onChange={() => imageURLChanged(widget.id, inputElem.value)}
                         value={widget.src}
                         ref={node => inputElem = node}/>
-                <h3>Preview</h3>
+                <h4>Preview</h4>
             </div>
             <img src={widget.src} alt={widget.src}/>
 
