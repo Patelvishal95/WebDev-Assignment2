@@ -25,7 +25,8 @@ const WidgetContainer = ({widget, preview, dispatch,deleteWidget,increaseOrder,d
                     <option>List</option>
                     <option>Image</option>
                     <option>Link</option>
-                </select><button className=" m-1 bg-warning fa fa-arrow-up float-right"
+                </select>
+                <button className=" m-1 bg-warning fa fa-arrow-up float-right"
                                  onClick={() => ( decreaseOrder(widget))}> </button>
                 <button className=" mt-1 bg-warning fa fa-arrow-down float-right"
                         onClick={() => (increaseOrder(widget))}> </button>

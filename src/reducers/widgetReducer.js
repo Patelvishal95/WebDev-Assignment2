@@ -121,7 +121,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
 
         case constants.SAVE:
             console.log(state.widgets)
-            fetch('http://localhost:8080/api/widget', {
+            fetch('http://localhost:8080/api/widget/'+action.lessonId, {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {
@@ -136,9 +136,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 return newState
             }
             else {
-
                 newState.widgets = action.widgets.sort(GetSortOrder('order1'))
-
                 return newState
             }
 

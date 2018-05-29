@@ -28,9 +28,9 @@ class CourseEditor extends React.Component {
             console.log("after set state")
         })
     }
-    componentWillReceiveProps (){
-        this.selectCourse
-        (this.props.match.params.courseId);
+    componentWillReceiveProps (newprops){
+        this.setState({moduleId:newprops.match.params.moduleId});
+
     }
     componentDidMount() {
         this.selectCourse

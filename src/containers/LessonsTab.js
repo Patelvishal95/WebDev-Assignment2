@@ -77,10 +77,10 @@ export default class LessonTabs
     }
     renderListofLessons(){
         let lessons = this.state.Lessson.map(function(lesson){
-            if(this.state.highlight==lesson.id){
+            if(this.state.highlight===lesson.id){
                 return  <li className="nav-item bg-secondary">
                     <a className="text-white nav-link active" onClick={this.lessonSelected}
-                       href="#" id={lesson.id}>
+                        id={lesson.id}>
                         <Link to={`/course/${this.state.courseId}/edit/${this.state.moduleId}/lesson/${lesson.id}`}
                               component={App}>{lesson.title}</Link>
                        <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/>
@@ -89,7 +89,7 @@ export default class LessonTabs
             else{
             return  <li className="nav-item">
                 <a className="text-white nav-link" onClick={this.lessonSelected}
-                                                href="#" id={lesson.id}>
+                                                 id={lesson.id}>
                     <Link to={`/course/${this.state.courseId}/edit/${this.state.moduleId}/lesson/${lesson.id}`}
                           component={App}>{lesson.title}</Link>
                  <i className=" pl-2 fa fa-trash" onClick={this.deleteLesson}/></a></li>;}

@@ -10,7 +10,7 @@ class CourseList extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = CourseServiceClient.instance;
-        this.state = {courses: []};
+        this.state = {courses: [{id:1,created:'',modified:''}]};
         this.onClick = this.onClick.bind(this);
 
         this.titleChanged = this.titleChanged.bind(this);
