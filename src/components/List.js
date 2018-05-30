@@ -1,9 +1,10 @@
 import React from 'react'
 
-const List = ({widget, preview, listTextChanged, listTypeChanged}) =>
+const List = ({widget, preview, listTextChanged, listTypeChanged,widgetNameChanged}) =>
 {
     let selectElem
     let inputElem
+    let inputElem1
     const renderlist = (text) => {
         var items = text.split('\n')
         return items.map((item)=>(<li id="item">{item}</li>))
@@ -15,6 +16,14 @@ const List = ({widget, preview, listTextChanged, listTypeChanged}) =>
             <div hidden={preview}>
                 <h2> List </h2>
                 <div className="row">
+                    <label className=" col-3 font-weight-bold">Widget Name</label>
+                    <input className="col-8 w-100"
+                           onChange={() => widgetNameChanged(widget.id, inputElem1.value)}
+                           value={widget.widgetName}
+                           placeholder="Enter Widget Name here"
+                           ref={node => inputElem1 = node}/>
+                </div>
+                <div className="row mt-2">
                     <label className="font-weight-bold col-3">List Content</label>
          < textarea className="col-8 w-100"
              onChange={() => listTextChanged(widget.id, inputElem.value)}

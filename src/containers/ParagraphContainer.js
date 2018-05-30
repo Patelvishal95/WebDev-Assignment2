@@ -5,7 +5,9 @@ import * as actions from "../actions";
 
 const dispathToPropsMapper = dispatch => ({
     paragraphTextChanged: (widgetId, newText) =>
-        actions.paragraphTextChanged(dispatch, widgetId, newText)
+        actions.paragraphTextChanged(dispatch, widgetId, newText),
+    widgetNameChanged: (widgetId, widgetName) =>
+        actions.widgetNameChanged(dispatch,widgetId,widgetName)
 })
 const stateToPropsMapper = state => ({
     preview: state.preview

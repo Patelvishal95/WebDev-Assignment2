@@ -5,7 +5,9 @@ import * as actions from "../actions";
 
 const dispathToPropsMapper = dispatch => ({
     imageURLChanged: (widgetId, imageURL) =>
-        actions.imageURLChanged(dispatch, widgetId, imageURL)
+        actions.imageURLChanged(dispatch, widgetId, imageURL),
+    widgetNameChanged: (widgetId, widgetName) =>
+        actions.widgetNameChanged(dispatch,widgetId,widgetName)
 })
 const stateToPropsMapper = state => ({
     preview: state.preview

@@ -8,14 +8,13 @@ import ListContainer from './ListContainer'
 import ImageContainer from './ImageContainer'
 import LinkContainer from './LinkContainer'
 import * as actions from "../actions";
-// if(preview){return 'list-group-item mt-2'}else{return 'mt-2'}
-const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increaseOrder,decreaseOrder,selectWidgetType}) => {
+const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increaseOrder,decreaseOrder,selectWidgetType,setXYAxis}) => {
     let selectElement
+
     return(
+
         <li className={'mt-2' + (preview ? '' : ' list-group-item')}>
             <div hidden={preview} className="mt-3">
-                {/*{widget.id} {widget.className}*/}
-                {/*{console.log("length "+widgets.length)}*/}
                 <button className="m-1 btn btn-sm btn-danger float-right fa fa-close" onClick={() =>deleteWidget(widget)}> </button>
                 <select className="m-1 float-right" value={widget.className}
                         onChange={e => selectWidgetType(widget,selectElement)
@@ -48,6 +47,7 @@ const WidgetContainer = ({widget, preview,widgets, dispatch,deleteWidget,increas
         </div>}
 
         </li>
+
     )
 }
 const dispatcherToPropsMapper
@@ -58,7 +58,8 @@ const dispatcherToPropsMapper
         actions.sortWidgets(dispatch)    },
     decreaseOrder:(widget) => { actions.decreaseOrder(dispatch,widget)
         actions.sortWidgets(dispatch)   },
-    selectWidgetType:(widget,selectElement) => actions.selectWidgetType(dispatch,widget,selectElement)
+    selectWidgetType:(widget,selectElement) => actions.selectWidgetType(dispatch,widget,selectElement),
+    setXYAxis:(y,widgetId) => {actions.setXYAxis(dispatch,y,widgetId)}
 })
 const WidgetContainerconnect = connect((state => ({
     preview: state.preview,

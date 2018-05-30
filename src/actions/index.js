@@ -1,10 +1,10 @@
 import * as constants from "../constants/index"
 
 export const headingTextChanged = (dispatch, widgetId, newText) => (
-  dispatch({
-    type: constants.HEADING_TEXT_CHANGED,
-    id: widgetId,
-    text: newText})
+    dispatch({
+        type: constants.HEADING_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
 )
 export const paragraphTextChanged = (dispatch, widgetId, newText) => (
     dispatch({
@@ -43,30 +43,28 @@ export const linkTextChanged = (dispatch, widgetId, name) => (
         name: name})
 )
 export const headingSizeChanged = (dispatch, widgetId, newSize) => (
-  dispatch({
-    type: constants.HEADING_SIZE_CHANGED,
-    id: widgetId,
-    size: newSize})
+    dispatch({
+        type: constants.HEADING_SIZE_CHANGED,
+        id: widgetId,
+        size: newSize})
 )
 
 export const findAllWidgets = (dispatch,lessonId) => {
-    console.log("in find all widgets")
-    console.log(lessonId)
-  fetch('http://localhost:8080/api/widget/'+lessonId)
-    .then(response => (
-    response.json())
-    .then(widgets => dispatch({
-      type: constants.FIND_ALL_WIDGETS,
-      widgets: widgets })))
+    fetch('http://localhost:8080/api/widget/'+lessonId)
+        .then(response => (
+            response.json())
+            .then(widgets => dispatch({
+                type: constants.FIND_ALL_WIDGETS,
+                widgets: widgets })))
 }
 export const addWidget = dispatch => (
-  dispatch({type: constants.ADD_WIDGET})
+    dispatch({type: constants.ADD_WIDGET})
 )
 export const save = (dispatch,lessonId) => (
-  dispatch({type: constants.SAVE,lessonId:lessonId})
+    dispatch({type: constants.SAVE,lessonId:lessonId})
 )
 export const preview = dispatch => (
-  dispatch({type: constants.PREVIEW})
+    dispatch({type: constants.PREVIEW})
 )
 
 export const deleteWidget = (dispatch,widget) => (dispatch({type: constants.DELETE_WIDGET, id: widget.id})
@@ -84,4 +82,15 @@ export const selectWidgetType = (dispatch,widget,selectElement) =>(dispatch({
 }))
 
 export const sortWidgets = (dispatch) => (dispatch({type :constants.SORT_WIDGETS}))
+export const setXYAxis =(dispatch,y,widgetId) => (dispatch({
+    type:constants.SET_XY_AXIS,
+    y:y,
+    widgetId:widgetId
+}))
 
+export const widgetNameChanged =(dispatch,widgetId,widgetName) => {
+    dispatch({
+        type:constants.WIDGET_NAME_CHANGED,
+        widgetId:widgetId,
+        widgetName:widgetName})
+    dispatch({type:constants.CHECK_UNIQUE})}

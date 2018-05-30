@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from "../actions"
 import WidgetContainer from './WidgetContainer'
+import Draggable from 'react-draggable';
 
 class WidgetList extends Component {
 
@@ -15,38 +16,51 @@ class WidgetList extends Component {
     }
     componentDidUpdate(newprops){
         if(this.props.match.params.lessonId!==newprops.match.params.lessonId){
-        this.props.findAllWidgets(this.props.match.params.lessonId)}
+            this.props.findAllWidgets(this.props.match.params.lessonId)
+            if(this.props.needsSaving){
+                var action = window.confirm('Do you want to save the changes')
+                if(action){
+                    this.props.save(newprops.match.params.lessonId)
+                }
+            }
+        }
     }
+    componentWillUnmount(){
+        if(this.props.needsSaving){
+            var action = window.confirm('Do you want to save the changes')
+            if(action){
+                this.props.save(this.props.match.params.lessonId)
+            }
+        }
+    }
+
     save(){
         this.props.save(this.props.match.params.lessonId);
+        this.setState({saved:1})
     }
     render() {
         return(
             <div className="container flex-fill col">
                 <div className="row-3 clearfix align-right">
-                    {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
-                    {/*<h1>Selected lesson {this.state.selectlesson}</h1>*/}
-                    <label className="switch pull-right my-auto">
+                    {this.props.unique && <label className="switch pull-right my-auto">
                         <input type="checkbox" onClick={this.props.preview}/>
                         <span className="slider round"></span>
-                    </label>
-                    {/*<button  type="button" className="btn btn-toggle pull-right" data-toggle="button"*/}
-                             {/*onClick={this.props.preview}/>*/}
-                    <h5 className="pull-right my-auto">Preview</h5>
-                    <button className="btn btn-success pull-right" hidden={this.props.previewMode} onClick={this.save}>
+                    </label> }
+                    {this.props.unique && <h5 className="pull-right my-auto">Preview</h5>}
+                    {this.props.unique && <button className="btn btn-success pull-right"  onClick={this.save}>
                         Save
-                    </button>
+                    </button>}
+                    {!this.props.unique && <h4 className="bg-danger text-white">All Widget Names Should be Unique and add widget names to every widget</h4>}
                 </div>
-
-                <div className="container height-100 width-100 px-0">
-                    <ul className="list-unstyled px-0">
-                        {this.props.widgets.map(widget => (
-                            <WidgetContainer widget={widget}
-                                             preview={this.props.previewMode}
-                                             key={widget.id}/>
-                        ))}
-                    </ul>
-                </div>
+                {/*<draggable className="container height-100 width-100 px-0">*/}
+                <ul className="list-unstyled px-0">
+                    {this.props.widgets.map(widget => (
+                        <WidgetContainer widget={widget}
+                                         preview={this.props.previewMode}
+                                         key={widget.id}/>
+                    ))}
+                </ul>
+                {/*</draggable>*/}
                 <button className="btn btn-danger float-right mx-0" onClick={this.props.addWidget}>   +     </button>
             </div>
         )
@@ -56,7 +70,10 @@ class WidgetList extends Component {
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgets,
     previewMode: state.preview,
-    lessonId:state.lessonId
+    lessonId:state.lessonId,
+    unique:state.unique,
+    needsSaving:state.needsSaving,
+    state:state
 })
 const dispatcherToPropsMapper
     = dispatch => ({

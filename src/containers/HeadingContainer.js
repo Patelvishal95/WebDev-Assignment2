@@ -7,7 +7,9 @@ const dispathToPropsMapper = dispatch => ({
     headingTextChanged: (widgetId, newText) =>
         actions.headingTextChanged(dispatch, widgetId, newText),
     headingSizeChanged: (widgetId, newSize) =>
-        actions.headingSizeChanged(dispatch, widgetId, newSize)
+        actions.headingSizeChanged(dispatch, widgetId, newSize),
+    widgetNameChanged: (widgetId, widgetName) =>
+        actions.widgetNameChanged(dispatch,widgetId,widgetName)
 })
 const stateToPropsMapper = state => ({
     preview: state.preview

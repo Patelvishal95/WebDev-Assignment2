@@ -1,13 +1,22 @@
 import React from  'react'
 
-const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
+const Heading = ({widget, preview, headingTextChanged, headingSizeChanged,widgetNameChanged}) => {
     let selectElem
     let inputElem
+    let inputElem1
     return(
         <div>
             <div hidden={preview}>
                 <h2> Heading</h2>
-              <div className="row">
+                <div className="row">
+                    <label className=" col-3 font-weight-bold mr-2">Widget Name</label>
+                    <input className="col-8"
+                           onChange={() => widgetNameChanged(widget.id, inputElem1.value)}
+                           value={widget.widgetName}
+                           placeholder="Enter Widget Name here"
+                           ref={node => inputElem1 = node}/>
+                </div>
+              <div className="row mt-2">
                 <label className=" col-3 font-weight-bold mr-2">Heading</label>
                 <input className="col-8"
                         onChange={() => headingTextChanged(widget.id, inputElem.value)}
