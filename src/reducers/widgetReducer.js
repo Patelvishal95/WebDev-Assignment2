@@ -123,7 +123,7 @@ export const widgetReducer = (state = {widgets: [], preview: false,unique:true,n
             return JSON.parse(JSON.stringify(newState))
 
         case constants.SAVE:
-            fetch('http://localhost:8080/api/widget/'+action.lessonId, {
+            fetch('http://localhost:8080/api/lesson/'+action.lessonId+'/widget', {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {

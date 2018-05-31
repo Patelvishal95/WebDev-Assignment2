@@ -50,7 +50,7 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => (
 )
 
 export const findAllWidgets = (dispatch,lessonId) => {
-    fetch('http://localhost:8080/api/widget/'+lessonId)
+    fetch('http://localhost:8080/api/lesson/'+lessonId+'/widget')
         .then(response => (
             response.json())
             .then(widgets => dispatch({
